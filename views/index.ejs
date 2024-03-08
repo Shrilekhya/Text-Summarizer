@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <script src="app.js" defer></script>
+    <title>Text Summarizer</title>
+    <style>
+        body {
+            align-items: center;
+            background: rgb(238, 174, 202);
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+            color: white;
+            font-family: "Oswald", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 200 - 700;
+            font-style: normal;
+            font-size: larger;
+        }
+
+        h1{
+            margin-left: 40%;
+            font-size: xx-large;
+        }
+
+        #summarizerForm, #heading {
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        p{
+            color: black;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>TEXT SUMMARIZER</h1>
+    <form id="summarizerForm">
+        <label for="inputBox">Enter your text here:</label>
+        <textarea id="inputBox" rows="15" cols="50"></textarea>
+        <button type="button" onclick="generateSummary()">Summarize</button>
+    </form>
+    <label id="heading">Your Summarized text</label>
+    <p id="summary"></p>
+    <script>
+        // Function to send text to the backend and update the summary
+        async function generateSummary() {
+            const inputText = document.getElementById("inputBox").value;
+            
+            // Send the input text to the backend
+            const response = await fetch('/generate_summary', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ inputText }),
+            });
+
+            // Update the HTML with the generated summary
+            const result = await response.json();
+            document.getElementById("summary").innerText = result.summary;
+        }
+    </script>
+</body>
+</html>
