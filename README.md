@@ -17,3 +17,5 @@ Enhances user experience with a web interface that facilitates easy text input a
 Finally, this Text Summarizer Application caters to users seeking efficient and accurate summarization of large bodies of text,
 enhancing accessibility and usability through its dual interfaces.
 
+![ScreenShot](homePage.png)
+
